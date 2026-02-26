@@ -1,20 +1,24 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware # Importar esto
+from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
+from app.routes import autores, libros # Importar las rutas
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Mi Biblioteca API")
 
-# Configuración del CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # En producción aquí pondrías la URL de tu frontend
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Incluimos los routers
+app.include_router(autores.router)
+app.include_router(libros.router)
+
 @app.get("/")
 def read_root():
-    return {"status": "API funcionando con CORS y Esquemas listos"}
+    return {"mensaje": "API de Biblioteca lista. Ve a /docs para probarla."}
