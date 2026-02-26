@@ -2,7 +2,7 @@
 
 Una API REST para gestionar autores y sus libros.
 
-## 🚀 Cómo ejecutar el proyecto
+## Cómo ejecutar el proyecto
 
 1. **Clonar el repositorio:**
    `git clone <url-del-repo>`
